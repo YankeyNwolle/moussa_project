@@ -2,6 +2,7 @@ using HelpdeskAPI.Data;
 using HelpdeskAPI.DTOs;
 using HelpdeskAPI.Models;
 using HelpdeskAPI.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -88,4 +89,59 @@ public class AuthController : ControllerBase
         return Ok(new AuthResponse(token, roleName, agent.Id_Agt,
             $"{agent.Prenom} {agent.Nom}"));
     }
+
+    // POST /api/auth/seed-agents
+    // Temporary setup endpoint for demo: creates/updates agents with BCrypt passwords.
+    // Remove or protect this endpoint before production.
+    [HttpPost("seed-agents")]
+    [AllowAnonymous]
+    public async Task<IActionResult> SeedAgents([FromBody] List<SeedAgentRequest> agents)
+    {
+        if (agents == null || agents.Count == 0)
+            return BadRequest(new { message = "La liste des agents est vide." });
+
+        foreach (var req in agents)
+        {
+            var existing = await _db.Agents
+                .FirstOrDefaultAsync(a => a.Login == req.Login);
+
+            if (existing == null)
+            {
+                var agent = new HelpdeskAPI.Models.Agent
+                {
+                    Nom = req.Nom,
+                    Prenom = req.Prenom,
+                    Email = req.Email,
+                    Login = req.Login,
+                    Mdp = BCrypt.Net.BCrypt.HashPassword(req.Mdp),
+                    Ref_Equ = req.Ref_Equ,
+                    Id_Rol = req.Id_Rol
+                };
+
+                _db.Agents.Add(agent);
+            }
+            else
+            {
+                existing.Nom = req.Nom;
+                existing.Prenom = req.Prenom;
+                existing.Email = req.Email;
+                existing.Mdp = BCrypt.Net.BCrypt.HashPassword(req.Mdp);
+                existing.Ref_Equ = req.Ref_Equ;
+                existing.Id_Rol = req.Id_Rol;
+            }
+        }
+
+        await _db.SaveChangesAsync();
+        return Ok(new { message = "Agents créés/mis à jour avec succès." });
+    }
 }
+
+public record SeedAgentRequest(
+    string Nom,
+    string Prenom,
+    string Email,
+    string Login,
+    string Mdp,
+    int Ref_Equ,
+    int Id_Rol
+);
