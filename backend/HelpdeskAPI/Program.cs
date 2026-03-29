@@ -38,7 +38,7 @@ builder.Services.AddAuthorization();
 builder.Services.AddCors(opt =>
 {
     opt.AddPolicy("ReactFrontend", policy =>
-        policy.WithOrigins("http://localhost:5173")
+        policy.SetIsOriginAllowed(_ => true)   // Docker + local dev
               .AllowAnyHeader()
               .AllowAnyMethod()
               .AllowCredentials());
