@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\yankey\\Documents\\helpdesk\\backend\\HelpdeskAPI\\HelpdeskAPI.csproj": {}
+    "C:\\Users\\yankey\\Documents\\helpdesk_moussa\\backend\\HelpdeskAPI\\HelpdeskAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\yankey\\Documents\\helpdesk\\backend\\HelpdeskAPI\\HelpdeskAPI.csproj": {
+    "C:\\Users\\yankey\\Documents\\helpdesk_moussa\\backend\\HelpdeskAPI\\HelpdeskAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\yankey\\Documents\\helpdesk\\backend\\HelpdeskAPI\\HelpdeskAPI.csproj",
+        "projectUniqueName": "C:\\Users\\yankey\\Documents\\helpdesk_moussa\\backend\\HelpdeskAPI\\HelpdeskAPI.csproj",
         "projectName": "HelpdeskAPI",
-        "projectPath": "C:\\Users\\yankey\\Documents\\helpdesk\\backend\\HelpdeskAPI\\HelpdeskAPI.csproj",
+        "projectPath": "C:\\Users\\yankey\\Documents\\helpdesk_moussa\\backend\\HelpdeskAPI\\HelpdeskAPI.csproj",
         "packagesPath": "C:\\Users\\yankey\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\yankey\\Documents\\helpdesk\\backend\\HelpdeskAPI\\obj\\",
+        "outputPath": "C:\\Users\\yankey\\Documents\\helpdesk_moussa\\backend\\HelpdeskAPI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\yankey\\AppData\\Roaming\\NuGet\\NuGet.Config"
